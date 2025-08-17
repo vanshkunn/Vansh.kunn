@@ -200,7 +200,7 @@
 
 </body>
 </html>
-
+<style>
 :root{
   --bg:#0f0f12;
   --ink:#15151e;
@@ -304,6 +304,7 @@ input:focus,select:focus,textarea:focus{border-color:#4747ff;box-shadow:0 0 0 4p
   .nav__links{display:none;position:absolute;top:56px;right:18px;background:#171722;border:1px solid #2c2c3a;border-radius:12px;padding:12px;flex-direction:column}
   .nav__links.show{display:flex}
 }
+  <script>
 // mobile menu toggle
 document.querySelector('.nav__toggle').addEventListener('click', () => {
   document.querySelector('.nav__links').classList.toggle('show');
