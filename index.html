@@ -207,19 +207,19 @@
   <meta charset="UTF-8">
   <title>My Website</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google Fonts for Poppins and Dancing Script (optional, for your font styles) -->
+  <!-- Google Fonts for Poppins and Dancing Script (optional) -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0f0f12;
-      --ink:#15151e;
-      --paper:#f7f3ea;
-      --gold:#c9ad2b;
-      --gold-dark:#9f8a1f;
-      --text:#e9e9ee;
-      --muted:#b8b8c5;
-      --accent:#6a7dff;
-      --primary:#ff8c37;
+      --bg: #181512;           /* slightly warm dark background */
+      --ink: #15151e;
+      --paper: #fffbe7;        /* pale yellow for light sections */
+      --gold: #ffe066;         /* vibrant yellow accent */
+      --gold-dark: #c9ad2b;   /* contrast yellow */
+      --text: #2c2c2c;        /* dark text for light backgrounds */
+      --muted: #b8b8c5;
+      --accent: #ffe066;       /* yellow accent */
+      --primary: #ffc300;      /* yellow for buttons */
     }
 
     *{box-sizing:border-box}
@@ -235,66 +235,96 @@
     .row{display:flex;gap:12px;flex-wrap:wrap}
 
     /* Navbar */
-    .nav{position:sticky;top:0;z-index:20;background:rgba(15,15,18,.75);backdrop-filter:blur(10px);border-bottom:1px solid #222}
-    .brand{font-weight:700;font-size:1.1rem;color:#fff;text-decoration:none}
-    .brand span{color:var(--accent)}
+    .nav{position:sticky;top:0;z-index:20;background:rgba(34,28,13,.90);backdrop-filter:blur(10px);border-bottom:2px solid var(--gold)}
+    .brand{font-weight:700;font-size:1.1rem;color:var(--gold);text-decoration:none}
+    .brand span{color:var(--primary)}
     .nav__inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
     .nav__links{display:flex;gap:18px;align-items:center}
-    .nav__links a{color:#ddd;text-decoration:none}
-    .nav__links a:hover{color:#fff}
-    .nav__toggle{display:none;background:#24242f;color:#fff;border:0;border-radius:8px;padding:8px 10px}
+    .nav__links a{color:var(--gold-dark);text-decoration:none;font-weight:600;}
+    .nav__links a:hover{color:var(--primary);}
+    .nav__toggle{display:none;background:var(--primary);color:#fff;border:0;border-radius:8px;padding:8px 10px}
 
     /* Buttons & chips */
-    .btn{background:var(--primary);color:#111;font-weight:700;border:0;border-radius:14px;padding:12px 18px;text-decoration:none;display:inline-block;box-shadow:0 8px 20px rgba(255,140,55,.35)}
-    .btn:hover{transform:translateY(-1px)}
-    .btn--ghost{background:#2a2a36;color:#e9e9ee;border:1px solid #3a3a4a;box-shadow:none}
+    .btn{
+      background:var(--primary);
+      color:#222;
+      font-weight:700;
+      border:0;
+      border-radius:14px;
+      padding:12px 18px;
+      text-decoration:none;
+      display:inline-block;
+      box-shadow:0 8px 20px rgba(255,195,0,.25);
+      transition:box-shadow .2s, transform .2s;
+    }
+    .btn:hover{
+      box-shadow:0 8px 30px 2px var(--gold-dark);
+      transform:translateY(-2px) scale(1.04);
+      background:var(--gold);
+    }
+    .btn--ghost{background:var(--paper);color:var(--primary);border:1px solid var(--gold-dark);box-shadow:none}
     .btn--sm{padding:8px 12px;border-radius:10px}
     .btn--block{display:block;text-align:center}
-    .chip{background:#24243a;border:1px solid #39395a;color:#d9d9ee;padding:8px 12px;border-radius:999px;text-decoration:none}
+    .chip{
+      background:var(--gold-dark);
+      border:1px solid var(--primary);
+      color:#fff;
+      padding:8px 12px;
+      border-radius:999px;
+      text-decoration:none
+    }
 
     /* Sections */
     .section{position:relative;padding:64px 0}
-    .section--dark{background:linear-gradient(180deg,#121219,#0f0f12)}
+    .section--dark{background:linear-gradient(180deg,#1d180f,#181512)}
     .section--gold{background:linear-gradient(180deg,var(--gold),var(--gold-dark));color:#1b1607}
-    .section--light{background:#161620}
+    .section--light{background:var(--paper);}
     .section--ink{background:#101018}
-    .section--paper{background:var(--paper);color:#222}
+    .section--paper{background:var(--paper);color:var(--text);}
     .muted{color:var(--muted)}
-    .badge{display:inline-block;background:#24243a;border:1px solid #3a3a59;color:#cfcfed;border-radius:999px;padding:6px 10px;font-size:.85rem}
+    .badge{
+      display:inline-block;
+      background:var(--gold-dark);
+      border:1px solid var(--gold);
+      color:#fffbe7;
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:.85rem
+    }
 
     /* Hero */
     .hero__inner{text-align:center;max-width:900px}
-    .hero__title{font-size:clamp(28px,6vw,56px);margin:.2em 0 .3em}
-    .script{font-family:'Dancing Script',cursive;color:var(--accent)}
+    .hero__title{font-size:clamp(28px,6vw,56px);margin:.2em 0 .3em;color:var(--gold-dark);}
+    .script{font-family:'Dancing Script',cursive;color:var(--primary);}
     .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
     /* Cards & gallery */
-    .cards .card{background:#1b1b26;border:1px solid #2a2a3a;border-radius:18px;padding:18px}
-    .card h3{margin:.2em 0}
-    .price{font-weight:700;font-size:1.4rem;margin:.2em 0 .6em}
-    .frame{border-radius:18px;overflow:hidden;border:6px solid #1c1c26;background:#0f0f16}
-    .ph{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#28283a,#1a1a26);border:1px dashed #3b3b55;border-radius:14px;color:#9ea0c7}
+    .cards .card{background:var(--paper);border:2px solid var(--gold);border-radius:18px;padding:18px}
+    .card h3{margin:.2em 0;color:var(--gold-dark);}
+    .price{font-weight:700;font-size:1.4rem;margin:.2em 0 .6em;color:var(--gold);}
+    .frame{border-radius:18px;overflow:hidden;border:6px solid var(--gold-dark);background:var(--paper);}
+    .ph{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold-dark),var(--gold));border:1px dashed var(--primary);border-radius:14px;color:var(--text);}
 
     /* Quotes */
-    .quote{background:#ffffff; color:#222; border-radius:16px; padding:22px; border:1px solid #e6e1d8}
-    .quote cite{display:block;margin-top:8px;color:#666}
+    .quote{background:var(--paper); color:var(--ink); border-radius:16px; padding:22px; border:2px solid var(--gold-dark)}
+    .quote cite{display:block;margin-top:8px;color:var(--gold-dark)}
 
     /* FAQ */
-    .faq{background:#1a1a26;border:1px solid #2b2b3a;border-radius:12px;padding:12px;margin:10px 0}
+    .faq{background:var(--gold-dark);border:1px solid var(--primary);border-radius:12px;padding:12px;margin:10px 0;color:#fffbe7;}
     .faq summary{cursor:pointer;font-weight:600}
     .faq p{margin:.6em 0}
 
     /* Form */
     .form{display:grid;gap:12px;max-width:620px;margin:16px auto 0}
-    input,select,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #2c2c3a;background:#12121a;color:#e9e9ee;outline:none}
-    input:focus,select:focus,textarea:focus{border-color:#4747ff;box-shadow:0 0 0 4px rgba(71,71,255,.15)}
-    .tiny{font-size:.8rem;color:#a7a7b9;margin-top:10px;text-align:center}
+    input,select,textarea{width:100%;padding:12px 14px;border-radius:12px;border:2px solid var(--gold-dark);background:var(--paper);color:var(--text);outline:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(255,195,0,.10)}
+    .tiny{font-size:.8rem;color:var(--muted);margin-top:10px;text-align:center}
 
     /* Footer */
-    .footer{background:#0d0d12;border-top:1px solid #202030;color:#a9a9ba}
+    .footer{background:var(--gold-dark);border-top:2px solid var(--primary);color:var(--paper);}
     .footer__inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0}
-    .footer a{color:#cfd0ff;text-decoration:none}
-    .footer a:hover{text-decoration:underline}
+    .footer a{color:var(--gold);text-decoration:none}
+    .footer a:hover{text-decoration:underline;color:var(--primary);}
 
     .divider{ 
       position:absolute;
@@ -303,14 +333,14 @@
       width:100%;
       height:120px;
       fill:currentColor;
-      color:#161620;
+      color:var(--primary);
       pointer-events:none;
       z-index:-1; /* keep divider behind content */
     }
     /* Responsive */
     @media (max-width: 860px){
       .nav__toggle{display:inline-block}
-      .nav__links{display:none;position:absolute;top:56px;right:18px;background:#171722;border:1px solid #2c2c3a;border-radius:12px;padding:12px;flex-direction:column}
+      .nav__links{display:none;position:absolute;top:56px;right:18px;background:var(--gold-dark);border:2px solid var(--primary);border-radius:12px;padding:12px;flex-direction:column}
       .nav__links.show{display:flex}
     }
   </style>
@@ -319,29 +349,55 @@
   <!-- Navbar Example -->
   <nav class="nav">
     <div class="container nav__inner">
-      <a class="brand" href="#">MyBrand <span>Sketch</span></a>
+      <a class="brand" href="#">Vansh.Kunn <span>Sketches</span></a>
       <button class="nav__toggle">&#9776;</button>
       <div class="nav__links">
-        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
         <a href="#">Gallery</a>
-        <a href="#">Contact</a>
+        <a href="#">Reviews</a>
+        <a href="#">FAQ</a>
+        <a href="#" class="btn btn--sm">Book Now</a>
       </div>
     </div>
   </nav>
 
   <!-- Example Hero Section -->
-  <section class="section hero__inner">
-    <h1 class="hero__title">Welcome to My Profile Sketches</h1>
-    <p class="script">Custom artwork, made just for you!</p>
+  <section class="section section--dark hero__inner">
+    <span class="badge">Handmade sketches, framed with love</span>
+    <h1 class="hero__title">Your Profile, My Pencil — Let's <span class="script">Create</span></h1>
+    <p style="color:var(--paper);margin-bottom:2em;">
+      Hello everyone, my name is <b>Vansh.Kunn</b>. I turn my followers' photos into timeless profile sketches — starting at ₹289. All-India delivery (parcel fee extra).
+    </p>
     <div class="cta-row">
-      <a href="#order" class="btn">Order Now</a>
+      <a href="#order" class="btn">Book Your Profile Sketch</a>
+      <a href="#gallery" class="btn btn--ghost">View My Sketches</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section section--paper">
+    <div class="container grid two">
+      <div>
+        <h2 style="color:var(--gold-dark);">About Me</h2>
+        <p>
+          I'm a portrait sketch artist from New Delhi. From small diary-page pieces to framed A4 gifts, I create personal art that captures your style in every line and shade.
+        </p>
+        <div class="row">
+          <a class="chip" href="#">WhatsApp</a>
+          <a class="chip" href="#">Instagram</a>
+        </div>
+      </div>
+      <div class="frame ph">
+        <span>Your Featured Sketch</span>
+      </div>
     </div>
   </section>
 
   <!-- Example Order Form -->
   <section id="order" class="section section--paper">
     <div class="container">
-      <h2>Book Your Sketch</h2>
+      <h2 style="color:var(--gold-dark);">Book Your Sketch</h2>
       <form class="form" onsubmit="return sendWhatsApp();">
         <input type="text" id="name" placeholder="Your Name" required>
         <select id="size">
@@ -362,7 +418,7 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer__inner">
-      <span>&copy; <span id="y"></span> MyBrand Sketch</span>
+      <span>&copy; <span id="y"></span> Vansh.Kunn Sketches</span>
       <a href="https://github.com/vanshkunn" target="_blank">GitHub</a>
     </div>
   </footer>
